@@ -1,2 +1,3 @@
 export * from './AuthRoutes'
-export * from './UserRoute'
+export * from './UserRoutes'
+export * from './ChannelRoutes'
