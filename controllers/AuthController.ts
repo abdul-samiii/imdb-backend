@@ -39,7 +39,7 @@ export const Login =async (req: Request, res: Response, next: NextFunction ) => 
         email: existingUser[0].email,
         name: existingUser[0].name
       })
-      return res.status(200).json({"message":"You are Logged in ", token: token})
+      return res.status(200).json({"message":"You are Logged in ", token: token, uid: existingUser[0]._id})
     } else {
       return res.status(403).json({"message":"Invalid Password"})
     }
