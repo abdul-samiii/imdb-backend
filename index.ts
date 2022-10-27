@@ -3,7 +3,8 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 
 import dbConnection from './services/Database'
-import { AuthRoute, ChannelRouter, UserRoute } from './routes'
+import { AuthRoute, ChannelRoute, EventRoute, UserRoute } from './routes'
+import { UploadRoutes } from './routes/UploadRoutes'
 
 const StartServer = async () => {
   const app = express()
@@ -15,8 +16,9 @@ const StartServer = async () => {
   //ROUTERS
   app.use('/auth', AuthRoute)
   app.use('/user', UserRoute)
-  app.use('/channel', ChannelRouter)
-  
+  app.use('/channel', ChannelRoute)
+  app.use('/upload', UploadRoutes)
+  app.use('/event', EventRoute)
   //CONNECTION TO DB
   await dbConnection()
 

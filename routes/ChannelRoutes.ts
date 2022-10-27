@@ -10,4 +10,4 @@ router.post('/create', CreateChannel)
 router.delete('/delete/:uid', DeleteChannel)
 router.get('/:uid', GetChannel)
 router.patch('/update', EditChannel)
-export { router as ChannelRouter }
+export { router as ChannelRoute }
