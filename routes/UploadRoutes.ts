@@ -6,9 +6,9 @@ let nowDate:any
 const newFileName = (extension:any) => {
   nowDate = `${Date.now()}.${extension}`
 }
-const storage = multer.diskStorage({
+const ImagesStorage = multer.diskStorage({
   destination: function (req, file, cb) {
-  cb(null, './uploads/')
+  cb(null, './uploads/images')
 },
 filename: function (req: any, file: any, cb: any) {
   switch (file.mimetype) {
@@ -29,17 +29,50 @@ filename: function (req: any, file: any, cb: any) {
   }
 }
 });
-const fileFilter = (req: any,file: any,cb: any) => {
-if(file.mimetype === "image/jpg"  || 
- file.mimetype ==="image/jpeg"  || 
- file.mimetype ===  "image/png"){
 
-cb(null, true);
-}else{
-cb(new Error("Image uploaded is not of type jpg/jpeg or png"),false);}}
-const upload = multer({storage: storage, fileFilter : fileFilter});
-router.post('/img',upload.array('images',5),async(req: Request, res:Response, next :NextFunction)=>{
+const VideosStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+  cb(null, './uploads/videos')
+},
+filename: function (req: any, file: any, cb: any) {
+  switch (file.mimetype) {
+    case 'video/mp4':
+      newFileName('mp4')
+      cb(null, nowDate)
+      break
+    default:
+      cb(null, null)
+  }
+}
+});
 
+
+const ImageFileFilter = (req: any,file: any,cb: any) => {
+  if(file.mimetype === "image/jpg"  || 
+    file.mimetype ==="image/jpeg"  || 
+    file.mimetype ===  "image/png"){
+    cb(null, true);
+  } else  {
+    cb(new Error("Image uploaded is not of type jpg/jpeg or png"),false)
+  }
+}
+
+const VideoFileFilter = (req: any,file: any,cb: any) => {
+  if(file.mimetype === "video/mp4"){
+    cb(null, true);
+  } else  {
+    cb(new Error("Image uploaded is not of type jpg/jpeg or png"),false)
+  }
+}
+
+const uploadImages = multer({storage: ImagesStorage, fileFilter : ImageFileFilter});
+const uploadVideos = multer({storage: VideosStorage});
+
+router.post('/img',uploadImages.array('images',5),async(req: Request, res:Response, next :NextFunction)=>{
  res.status(200).json({"message": "Uploaded", imgLink: nowDate})
 })
+router.post('/video',uploadVideos.array('videos',5),async(req: Request, res:Response, next :NextFunction)=>{
+  res.status(200).json({"message": "Uploaded", videoLink: nowDate})
+ })
+
  export {router as UploadRoutes};
