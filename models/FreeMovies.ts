@@ -9,6 +9,10 @@ const FreeMoviesSchema = new Schema({
 		type: String,
 		required: true
 	},
+	duration: {
+		type: String,
+		required: true
+	},
 	reviews:[{
 		type: mongoose.SchemaTypes.ObjectId,
 		ref: 'Reviews'

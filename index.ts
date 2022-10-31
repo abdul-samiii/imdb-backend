@@ -3,12 +3,16 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 
 import dbConnection from './services/Database'
-import { AuthRoute, ChannelRoute, EventRoute, MoviesRoute, UserRoute } from './routes'
+import { AuthRoute, CelebrityRoute, ChannelRoute, EventRoute, MoviesRoute, UserRoute } from './routes'
 import { UploadRoutes } from './routes/UploadRoutes'
 
 const StartServer = async () => {
   const app = express()
   const port = process.env.PORT || 5500
+  
+
+  app.use(express.static(__dirname + '/public'));
+  app.use('/uploads', express.static('uploads'));
   app.use(bodyParser.json())
   app.use(bodyParser.urlencoded({extended: true}))
   app.use((req, res, next) => { next(); }, cors({maxAge: 84600}))
@@ -20,6 +24,7 @@ const StartServer = async () => {
   app.use('/upload', UploadRoutes)
   app.use('/event', EventRoute)
   app.use('/movies', MoviesRoute)
+  app.use('/celebrity', CelebrityRoute)
 
   //CONNECTION TO DB
   await dbConnection()
