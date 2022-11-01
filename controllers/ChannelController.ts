@@ -10,15 +10,22 @@ export const CreateChannel = async (req: Request, res: Response, next: NextFunct
   if (user[0] != null) {
     if (!user[0].content_creator) {
       if (channelExist[0] == null) {
+        let channelNew: any
         await User.findOneAndUpdate({_id: uid}, {
           $set:{
             content_creator: true
           }
         }).then( async() => {
-          await Channel.create({
+          channelNew = await Channel.create({
             channelName,
             description,
             owner: uid
+          }).then( async() => {
+            await User.findOneAndUpdate({_id: uid}, {
+              $set:{
+                channel: channelNew._id
+              }
+            })
           })
         })
         return res.status(200).json({"message": "Channel Created Successfully"})
