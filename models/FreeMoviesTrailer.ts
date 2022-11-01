@@ -1,6 +1,6 @@
 import mongoose, {model, Schema} from 'mongoose'
 
-const FreeMoviesSchema = new Schema({
+const FreeMoviesTrailerSchema = new Schema({
 	title:{
 		type: String,
 		required: true
@@ -23,5 +23,5 @@ const FreeMoviesSchema = new Schema({
 	}
 })
 
-const FreeMovies = model('freemovies', FreeMoviesSchema)
-export { FreeMovies }
+const FreeMoviesTrailer = model('freemoviestrailer', FreeMoviesTrailerSchema)
+export { FreeMoviesTrailer }

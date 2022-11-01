@@ -1,6 +1,6 @@
 import mongoose, {model, Schema} from 'mongoose'
 
-const PaidMoviesSchema = new Schema({
+const PaidMoviesTrailerSchema = new Schema({
 	title:{
 		type: String,
 		required: true
@@ -19,5 +19,5 @@ const PaidMoviesSchema = new Schema({
 	}
 })
 
-const PaidMovies = model('paidmovies', PaidMoviesSchema)
-export { PaidMovies }
+const PaidMoviesTrailer = model('paidmoviestrailer', PaidMoviesTrailerSchema)
+export { PaidMoviesTrailer }

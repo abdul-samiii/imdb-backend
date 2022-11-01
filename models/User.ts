@@ -32,7 +32,11 @@ const UserSchema = new Schema({
   reviews: [{
     type: mongoose.SchemaTypes.ObjectId,
     ref: 'rating'
-  }]
+  }],
+  channel: {
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: 'channel'
+  }
 })
 const User = model('user', UserSchema)
 export {User}
