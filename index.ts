@@ -3,7 +3,7 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 
 import dbConnection from './services/Database'
-import { AuthRoute, CelebrityRoute, ChannelRoute, EventRoute, MoviesRoute, UserRoute } from './routes'
+import { AuthRoute, CelebrityRoute, ChannelRoute, EventRoute, MoviesRoute, ReviewRoute, UserRoute } from './routes'
 import { UploadRoutes } from './routes/UploadRoutes'
 
 const StartServer = async () => {
@@ -25,6 +25,7 @@ const StartServer = async () => {
   app.use('/event', EventRoute)
   app.use('/movies', MoviesRoute)
   app.use('/celebrity', CelebrityRoute)
+  app.use('/review', ReviewRoute)
 
   //CONNECTION TO DB
   await dbConnection()
