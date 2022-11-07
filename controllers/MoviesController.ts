@@ -51,7 +51,7 @@ export const GetTrailer = async (req: Request, res: Response, next: NextFunction
       //       channel: channel
       //     })
       //   }
-        const freeMovies = await FreeMoviesTrailer.find()
+        const freeMovies = await FreeMoviesTrailer.find().populate({path: 'reviews'})
           return res.status(200).json({"message": "Trailer Fetched", "freeMovies": freeMovies})
         } else {
           return res.status(403).json({"message": "Something went wrong"})
