@@ -26,5 +26,5 @@ const ReviewsSchema = new Schema({
 		ref: 'freemoviesimage'
 	}
 })
-const Reviews = model('reviews', ReviewsSchema)
+const Reviews = model('review', ReviewsSchema)
 export { Reviews }

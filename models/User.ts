@@ -31,7 +31,7 @@ const UserSchema = new Schema({
   },
   reviews: [{
     type: mongoose.SchemaTypes.ObjectId,
-    ref: 'rating'
+    ref: 'review'
   }],
   channel: {
     type: mongoose.SchemaTypes.ObjectId,
