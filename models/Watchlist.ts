@@ -1,4 +1,4 @@
-import mongoose, {model, Schema} from 'mongoose'
+import mongoose, {model, mongo, Schema} from 'mongoose'
 
 const WatchlistSchema = new Schema({
 	freeVideo: {
@@ -8,6 +8,10 @@ const WatchlistSchema = new Schema({
   paidVideo: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: 'paidmoviestrailer'
+  },
+  user:{
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: 'user'
   }
 })
 

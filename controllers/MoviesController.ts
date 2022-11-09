@@ -35,9 +35,6 @@ export const AddTrailer = async (req: Request, res: Response, next: NextFunction
 // GET MOVIE Trailer
 export const GetTrailer = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { channel } = req.body
-    const channelExist = await Channel.find({channel})
-    if (channelExist[0] != null) {
       // if (type === 'free') {
       //     FreeMovies.create({
       //       title: title,
@@ -51,11 +48,8 @@ export const GetTrailer = async (req: Request, res: Response, next: NextFunction
       //       channel: channel
       //     })
       //   }
-        const freeMovies = await FreeMoviesTrailer.find().populate({path: 'reviews'})
+        const freeMovies = await FreeMoviesTrailer.find().populate({path: 'reviews'}).populate({path: 'channel'})
           return res.status(200).json({"message": "Trailer Fetched", "freeMovies": freeMovies})
-        } else {
-          return res.status(403).json({"message": "Something went wrong"})
-        }
   } catch (error) {
     return res.status(403).json({"error": error})
   }
@@ -137,7 +131,7 @@ export const GetMovieImages= async (req: Request, res: Response, next: NextFunct
       //       channel: channel
       //     })
       //   }
-        const freeMoviesImage = await FreeMoviesImage.find()
+        const freeMoviesImage = await FreeMoviesImage.find().populate({path: 'channel'})
           return res.status(200).json({"message": "Movie Images Fetched", "freeMoviesImage": freeMoviesImage})
         } else {
           return res.status(403).json({"message": "Something went wrong"})

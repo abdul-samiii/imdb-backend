@@ -29,6 +29,7 @@ export const Registeration = async (req: Request, res: Response, next: NextFunct
 //USER LOGIN
 export const Login =async (req: Request, res: Response, next: NextFunction ) => {
   const { email, password} = req.body
+  console.log(email)
   var existingUser = await User.find({email:email})
   console.log(existingUser)
   if (existingUser[0] != null) {
