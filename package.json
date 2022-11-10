@@ -6,10 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.ts",
-    "dev": "nodemon -x ts-node index.ts"
+    "dev": "nodemon -x ts-node index.ts",
+    "postinstall": "tsc",
+    "watch-node": "nodemon dist/index.ts",
+    "watch-ts": "tsc -w",
+    "deploy": "git add . && git commit -m Heroku && git push heroku master"
   },
   "author": "Abdul Sami",
   "license": "ISC",
+  "postinstall": "tsc && mv -i -v public dist/ && rm -v -rf src",
   "dependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.12",
