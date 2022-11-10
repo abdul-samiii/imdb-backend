@@ -4,7 +4,7 @@ import { GeneratePassword, GenerateSalt, GenerateSignature, ValidatePassword } f
 
 //USER REGISTERATION
 export const Registeration = async (req: Request, res: Response, next: NextFunction) => {
-  const { name, email, password, phone, content_creator, pro, reviews} = req.body
+  const { name, email, password, phone, content_creator, pro, reviews, city, dob, cnic} = req.body
   const alreadyRegister = await User.find({ email: email})
   console.log(alreadyRegister)
   if ( alreadyRegister[0] != null) {
@@ -21,7 +21,10 @@ export const Registeration = async (req: Request, res: Response, next: NextFunct
     phone: phone,
     content_creator: content_creator,
     pro: pro,
-    reviews: reviews
+    reviews: reviews,
+    city: city,
+    dob: dob,
+    cnic: cnic,
   })
   return res.status(200).json({"message":"Registered Successfully"})
 }
@@ -47,4 +50,25 @@ export const Login =async (req: Request, res: Response, next: NextFunction ) => 
   } else {
     return res.status(400).json({"message":"User not found"})
   }
+}
+
+//CHANGE PASSWORD
+export const ChangePassword = async (req: Request, res: Response, next: NextFunction) => {
+  const { OldPassword, NewPassword, uid} = req.body
+  const existingUser = await User.find({_id:uid})
+  const validation = await ValidatePassword(OldPassword, existingUser[0].password, existingUser[0].salt)
+    if (validation) {
+      const salt = await GenerateSalt();
+      var hashPassword;
+      hashPassword = await GeneratePassword(NewPassword, salt)
+      console.log(salt, hashPassword)
+      await User.updateOne({_id: uid},{
+        $set:{
+        password: hashPassword,
+        salt: salt,
+      }})
+      return res.status(200).json({"message": "Password Changed Successfully"})
+    } else {
+      return res.status(403).json({"message":"Invalid Password"})
+    }
 }

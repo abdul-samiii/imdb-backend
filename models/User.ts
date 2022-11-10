@@ -21,6 +21,18 @@ const UserSchema = new Schema({
     type: String,
     default: '-'
   },
+  city: {
+    type: String,
+    default: '-'
+  },
+  dob: {
+    type: String,
+    default: '-'
+  },
+  cnic: {
+    type: String,
+    default: ''
+  },
   content_creator:{
     type: Boolean,
     default: false
