@@ -1,2 +1,5 @@
-# Imdb-Backend
-# imdb-backend
+*Description*
+This is the backend of IMDB Test Project. I have implemented this in Typescript. MongoDB is used for storing data. AuthController.ts has controller functions for simple Authentication. lets talk about how authentication is implemented here, I've used bcrypt pcakage for hasing the password ans JWT jsonwebtoken for generating the token which'll be required on the client side for a session to continue or be valid.
+For uploading media content like videos and images I'm using a package called multer which puts the media content in a folder /uploads, which can be easily retrieved from client side.
+After authentication user can subscribe to a channel to view the content of that particular channel like videos, images, news or what so ever the channel have. The ChannelController.ts manage all the Crud regarding channel creation, name changing, deletion. The we have contollers like EventController, CelebrityController, MoviesController which perform operations in the data that has to be uploaded on the channel.
+User can rate a movie on the scale of 5, on the frontend the cumulative ratings will be shown to the user. Also if a user finds a movie trailer intresting He/She can add it to the watchlist, so it can be easily retrieved later on. There is a SearchController which search through all the data availiable on the channel, so on the frontend side the user can enter anything, if it matches any of the data present on the channel it'll be returned to the user.
